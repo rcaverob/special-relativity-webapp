@@ -6,7 +6,7 @@ import {
   validateNumeric,
   formatted,
 } from '../utils/numberUtils';
-import animationData from '../lotties/rocket-3.json';
+import animationData from '../lotties/rocket.json';
 import Select from 'react-select';
 import debounce from 'lodash.debounce';
 import Lottie from 'react-lottie';
