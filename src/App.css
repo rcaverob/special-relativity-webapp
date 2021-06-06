@@ -1,25 +1,40 @@
 html,
 body {
   font-family: 'Inter', sans-serif;
+  margin: 0;
+  /* background-color: #073349; */
+}
+
+* {
+  box-sizing: border-box;
 }
 
 .select {
-  width: 500px;
+  width: 90%;
+}
+
+.earth {
+  width: 60%;
 }
 
 .container {
-  width: clamp(300px, 50%, 700px);
+  width: min(100%, 600px);
+  /* margin: auto; */
+  padding: 0.5rem 1rem;
   margin: auto;
   display: flex;
+  height: 100vh;
   flex-direction: column;
-  justify-content: space-evenly;
+  /* justify-content: space-between; */
   align-items: center;
+  /* background-color: red; */
 }
 
-.anim-container {
-  background-color: #111;
-  width: 300px;
-  height: 300px;
+.sub-container {
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+  flex: 1;
 }
 
 input {
@@ -27,6 +42,19 @@ input {
   font-size: 1.2rem;
 }
 
-.no-click {
+.lottie-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.lottie {
+  display: flex;
   pointer-events: none;
+  max-width: 30vh;
+  /* width: min(100% 10px); */
+  /* flex: 1; */
+  /* width: 100%; */
+  /* margin: -9rem -2rem -1rem -2rem; */
+  /* display: flex;
+  background-color: #fff; */
 }

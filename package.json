@@ -8,7 +8,9 @@
     "@testing-library/user-event": "^12.1.10",
     "@types/jest": "^26.0.15",
     "@types/node": "^12.0.0",
-    "@types/react-dom": "^17.0.0",
+    "@types/react-dom": "^17.0.6",
+    "lodash.debounce": "^4.0.8",
+    "lodash.throttle": "^4.1.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-lottie": "^1.2.3",
@@ -42,6 +44,8 @@
     ]
   },
   "devDependencies": {
+    "@types/lodash.debounce": "^4.0.6",
+    "@types/lodash.throttle": "^4.1.6",
     "@types/react": "^17.0.9",
     "@types/react-lottie": "^1.2.5",
     "@types/react-select": "^4.0.15"
