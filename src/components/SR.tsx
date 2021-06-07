@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useRef } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import {
@@ -10,7 +10,7 @@ import animationData from '../lotties/rocket.json';
 import Select from 'react-select';
 import debounce from 'lodash.debounce';
 import Lottie from 'react-lottie';
-import earthImg from '../assets/earth-small.png'; // gives image path
+import earthImg from '../assets/earth-small.png';
 
 const defaultOptions = {
   loop: true,
@@ -56,6 +56,7 @@ const SR = () => {
   const [velocity, setVelocity] = useState(0);
   const rocketAnimationSpeed = scale(velocity, 0, 100, 0.1, 3);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   const setATDebounced = useCallback(
     debounce((timeNum, v) => {
       setSpaceshipTime(formatted(calculateTimeDilation(timeNum, v)));
