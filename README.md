@@ -1,7 +1,8 @@
 # Time Dilation Calculator
 
-## Available Scripts
+## How To Run
 
+Clone this repo and go to the project directory.
 In the project directory, you can run:
 
 ### `yarn start`
