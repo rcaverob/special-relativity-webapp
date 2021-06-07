@@ -2,6 +2,7 @@ html,
 body {
   font-family: 'Inter', sans-serif;
   margin: 0;
+  color: #222;
   /* background-color: #073349; */
 }
 
@@ -13,48 +14,108 @@ body {
   width: 90%;
 }
 
+.earth-container {
+  display: flex;
+  flex: 1;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+  padding: 1rem;
+}
+
 .earth {
-  width: 60%;
+  width: 270px;
 }
 
 .container {
   width: min(100%, 600px);
-  /* margin: auto; */
   padding: 0.5rem 1rem;
   margin: auto;
   display: flex;
   height: 100vh;
   flex-direction: column;
-  /* justify-content: space-between; */
   align-items: center;
-  /* background-color: red; */
+}
+
+.form-container {
+  display: flex;
+  flex-direction: row;
+  font-size: 1rem;
+}
+
+.form-container .select {
+  width: 10ch;
+}
+
+.form-container input {
+  font-size: 1rem;
+  width: 20ch;
 }
 
 .sub-container {
   display: flex;
-  width: 100%;
+  min-width: 50%;
   flex-direction: column;
   flex: 1;
+  justify-content: space-between;
+  align-items: center;
 }
 
-input {
+.spaceship-form {
+  width: 100%;
+}
+
+/* input {
   padding: 2px;
   font-size: 1.2rem;
-}
+} */
 
-.lottie-container {
+/* .lottie-container {
   display: flex;
   justify-content: center;
   align-items: center;
-}
+} */
 .lottie {
   display: flex;
   pointer-events: none;
   max-width: 30vh;
-  /* width: min(100% 10px); */
-  /* flex: 1; */
-  /* width: 100%; */
-  /* margin: -9rem -2rem -1rem -2rem; */
-  /* display: flex;
-  background-color: #fff; */
+}
+
+/* On screens that are 600px or more*/
+@media screen and (min-width: 800px) {
+  html {
+    background-color: #073349;
+    font-size: 1.1rem;
+  }
+  .outer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .container {
+    width: min(80%, 1000px);
+    height: min(90vh, 900px);
+    flex-direction: row;
+    border-radius: 30px;
+    background-color: white;
+    padding: 1.15rem 0.5rem;
+  }
+
+  .sub-container {
+    height: 100%;
+  }
+
+  .earth {
+    width: min(90%, 600px);
+  }
+}
+
+@media screen and (min-width: 1100px) {
+  html {
+    background-color: #073349;
+    font-size: 1.5rem;
+  }
 }

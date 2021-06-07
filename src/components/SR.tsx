@@ -24,7 +24,6 @@ const defaultOptions = {
 const timeOptions = [
   { value: 1, label: 'Days' },
   { value: 365, label: 'Years' },
-  // { value: 'vanilla', label: 'Vanilla' },
 ];
 
 function scale(
@@ -62,21 +61,8 @@ const SR = () => {
   };
 
   const [velocity, setVelocity] = useState(0);
+  const rocketAnimationSpeed = scale(velocity, 0, 100, 0.1, 3);
 
-  // const rocketContainer = useRef<HTMLDivElement>(null);
-
-  const rocketAnimationSpeed = scale(velocity, 0, 100, 0.1, 6);
-
-  // const updateTime = debounce((humanTimeNumeric: number, velocity: number) => {
-  //   const ATNum = calculateTimeDilation(humanTimeNumeric, velocity);
-  //   setAlienTime(formatted(ATNum));
-  // }, 1000);
-  // useCallback(
-  //   () => {
-  //     callback
-  //   },
-  //   [],
-  // )
   const setATDebounced = useCallback(
     // setAlienTime("loading");
     debounce((timeNum, v) => {
@@ -87,72 +73,65 @@ const SR = () => {
   );
 
   useEffect(() => {
-    // const AT = debouncedTimeDilation(humanTimeNumeric, velocity);
     setAlienTime('Loading');
     setATDebounced(humanTimeNumeric, velocity);
-    // if (AT) {
-    //   setAlienTime(AT);
-    // }
     // return () => {
     //   cleanup
     // }
   }, [humanTimeNumeric, setATDebounced, velocity]);
-  // const AT = calculateTimeDilation(humanTimeNumeric, velocity);
-  // console.log(AT);
 
-  // const alienTime = formatted(AT);
-  // const alienTime: string = formatted(
-  //   calculateTimeDilation(humanTimeNumeric, velocity)
-  // );
-
-  console.log('hello');
   return (
-    <div className="container">
-      <div className="sub-container">
-        <h3>Human time is: </h3>{' '}
-        <input
-          value={humanTime}
-          onChange={(e) => handleInputChange(e.target.value)}
-        ></input>{' '}
-        <Select
-          className="select"
-          // classNamePrefix="select"
-          defaultValue={timeOptions[0]}
-          // isDisabled={isDisabled}
-          // isLoading={isLoading}
-          // isClearable={isClearable}
-          // isRtl={isRtl}
-          // isSearchable={isSearchable}
-          // name="color"
-          options={timeOptions}
-        />
-        <img src={earthImg} alt="Earth" className="earth" />
-      </div>
-
-      <div className="sub-container">
-        <h3>Alien time is: {alienTime}</h3>
-        <h3>Spaceship Velocity is: </h3>
-        <h3>{velocity}% light speed</h3>
-        <Slider
-          min={0}
-          step={0.01}
-          max={99.99}
-          onChange={(val) => setVelocity(val)}
-        />
-        {/* <div className="anim-container" ref={rocketContainer}></div> */}
-        <div className="lottie-container">
-          <div className="lottie">
-            <Lottie
-              options={defaultOptions}
-              // height={'100%'}
-              // width={'100%'}
-              isPaused={false}
-              speed={rocketAnimationSpeed}
-            />
+    <div className="outer">
+      <div className="container">
+        <div className="sub-container">
+          <div className="top">
+            <h3>Human time is: </h3>{' '}
+            <div className="form-container">
+              <input
+                value={humanTime}
+                onChange={(e) => handleInputChange(e.target.value)}
+              ></input>{' '}
+              <Select
+                className="select"
+                defaultValue={timeOptions[0]}
+                // isDisabled={isDisabled}
+                // isLoading={isLoading}
+                // isClearable={isClearable}
+                // isSearchable={isSearchable}
+                name="time-unit"
+                options={timeOptions}
+              />
+            </div>
+          </div>
+          <div className="earth-container">
+            <img src={earthImg} alt="Earth" className="earth" />
           </div>
         </div>
+        <div className="sub-container">
+          <div className="spaceship-form">
+            <h3>Spaceship Velocity is: </h3>
+            <h3>{velocity}% light speed</h3>
+            <Slider
+              min={0}
+              step={0.01}
+              max={99.99}
+              onChange={(val) => setVelocity(val)}
+            />
+          </div>
+          <div className="lottie-container">
+            <div className="lottie">
+              <Lottie
+                options={defaultOptions}
+                // height={'100%'}
+                // width={'100%'}
+                isPaused={false}
+                speed={rocketAnimationSpeed}
+              />
+            </div>
+          </div>
+          <h3>Alien time is: {alienTime}</h3>
+        </div>
       </div>
-      {/* <Range /> */}
     </div>
   );
 };
