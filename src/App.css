@@ -20,11 +20,7 @@ body {
   justify-content: center;
   align-items: center;
   width: 100%;
-  padding: 1rem;
-}
-
-.earth {
-  width: 270px;
+  /* padding: 1rem; */
 }
 
 .container {
@@ -53,6 +49,8 @@ body {
 }
 
 .sub-container {
+  /* max-height: 45vh; */
+  margin: 1px 1px;
   display: flex;
   min-width: 50%;
   flex-direction: column;
@@ -65,22 +63,34 @@ body {
   width: 100%;
 }
 
-/* input {
-  padding: 2px;
-  font-size: 1.2rem;
-} */
-
-/* .lottie-container {
+.lottie-container {
   display: flex;
   justify-content: center;
   align-items: center;
-} */
-.lottie {
-  display: flex;
-  pointer-events: none;
-  max-width: 30vh;
+  max-height: 60%;
 }
 
+.lottie {
+  pointer-events: none;
+}
+
+@media screen and (max-height: 800px) {
+  body {
+    font-size: 0.875rem;
+  }
+  .earth {
+    width: 156px;
+    height: 156px;
+  }
+
+  .lottie {
+    transform: scale(0.6);
+  }
+
+  .lottie-container {
+    height: 168px;
+  }
+}
 /* On screens that are 600px or more*/
 @media screen and (min-width: 800px) {
   html {
@@ -105,11 +115,17 @@ body {
   }
 
   .sub-container {
+    max-height: 100vh;
     height: 100%;
   }
 
   .earth {
-    width: min(90%, 600px);
+    width: 290px;
+    height: 290px;
+  }
+
+  .lottie {
+    transform: scale(1.3);
   }
 }
 

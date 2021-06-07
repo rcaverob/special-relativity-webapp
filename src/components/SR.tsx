@@ -90,6 +90,7 @@ const SR = () => {
               <input
                 value={humanTime}
                 onChange={(e) => handleInputChange(e.target.value)}
+                type="number"
               ></input>{' '}
               <Select
                 className="select"
@@ -104,7 +105,13 @@ const SR = () => {
             </div>
           </div>
           <div className="earth-container">
-            <img src={earthImg} alt="Earth" className="earth" />
+            <img
+              src={earthImg}
+              alt="Earth"
+              width={260}
+              height={260}
+              className="earth"
+            />
           </div>
         </div>
         <div className="sub-container">
@@ -122,8 +129,8 @@ const SR = () => {
             <div className="lottie">
               <Lottie
                 options={defaultOptions}
-                // height={'100%'}
-                // width={'100%'}
+                // height={260}
+                width={230}
                 isPaused={false}
                 speed={rocketAnimationSpeed}
               />
