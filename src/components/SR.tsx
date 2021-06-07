@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback } from 'react';
+import React, { useState, useEffect, useCallback, useRef } from 'react';
 import Slider, { Range } from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import {
@@ -22,8 +22,9 @@ const defaultOptions = {
 };
 
 const timeOptions = [
-  { value: 1, label: 'Days' },
-  { value: 365, label: 'Years' },
+  { value: 'Days', label: 'Days' },
+  { value: 'Months', label: 'Months' },
+  { value: 'Years', label: 'Years' },
 ];
 
 function scale(
@@ -36,22 +37,15 @@ function scale(
   return ((number - inMin) * (outMax - outMin)) / (inMax - inMin) + outMin;
 }
 
-// const debouncedTimeDilation = throttle(
-//   (humanTimeNumeric: number, velocity: number) => {
-//     const ATNum = calculateTimeDilation(humanTimeNumeric, velocity);
-//     return formatted(ATNum);
-//   },
-//   1000,
-//   { leading: true, trailing: false }
-// );
-
 const SR = () => {
+  // const selectRef = useRef(null);
   // Time as measured by observer on Earth
   const [humanTime, setHumanTime] = useState('');
   const humanTimeNumeric = Number(humanTime);
+  const [timeUnit, setTimeUnit] = useState('Days');
 
   // Time as measured by observer moving relative to static observer
-  const [alienTime, setAlienTime] = useState('');
+  const [spaceshipTime, setSpaceshipTime] = useState('');
 
   // Only Accept numbers and dot in input
   const handleInputChange = (text: string) => {
@@ -64,16 +58,16 @@ const SR = () => {
   const rocketAnimationSpeed = scale(velocity, 0, 100, 0.1, 3);
 
   const setATDebounced = useCallback(
-    // setAlienTime("loading");
+    // setSpaceshipTime("loading");
     debounce((timeNum, v) => {
-      setAlienTime(formatted(calculateTimeDilation(timeNum, v)));
-      // setAlienTime(val);
+      setSpaceshipTime(formatted(calculateTimeDilation(timeNum, v)));
+      // setSpaceshipTime(val);
     }, 200),
     []
   );
 
   useEffect(() => {
-    setAlienTime('Loading');
+    setSpaceshipTime('Calculating...');
     setATDebounced(humanTimeNumeric, velocity);
     // return () => {
     //   cleanup
@@ -84,21 +78,21 @@ const SR = () => {
     <div className="outer">
       <div className="container">
         <div className="sub-container">
-          <div className="top">
-            <h3>Human time is: </h3>{' '}
+          <div className="top" style={{ width: '100%' }}>
+            <h3>Earth clock measures: </h3>{' '}
             <div className="form-container">
               <input
                 value={humanTime}
-                onChange={(e) => handleInputChange(e.target.value)}
+                onChange={(e) => {
+                  // e.preventDefault();
+                  handleInputChange(e.target.value);
+                }}
                 type="number"
               ></input>{' '}
               <Select
+                onChange={(e) => setTimeUnit(e!.value)}
                 className="select"
                 defaultValue={timeOptions[0]}
-                // isDisabled={isDisabled}
-                // isLoading={isLoading}
-                // isClearable={isClearable}
-                // isSearchable={isSearchable}
                 name="time-unit"
                 options={timeOptions}
               />
@@ -116,12 +110,24 @@ const SR = () => {
         </div>
         <div className="sub-container">
           <div className="spaceship-form">
-            <h3>Spaceship Velocity is: </h3>
+            <h3 style={{ lineHeight: 0 }}>Spaceship velocity is: </h3>
             <h3>{velocity}% light speed</h3>
             <Slider
               min={0}
               step={0.01}
               max={99.99}
+              trackStyle={[
+                {
+                  background: '#1e90ff',
+                },
+              ]}
+              handleStyle={[
+                {
+                  background: 'white',
+                  color: '#1e90ff',
+                  borderColor: '#1e90ff',
+                },
+              ]}
               onChange={(val) => setVelocity(val)}
             />
           </div>
@@ -129,14 +135,18 @@ const SR = () => {
             <div className="lottie">
               <Lottie
                 options={defaultOptions}
-                // height={260}
                 width={230}
                 isPaused={false}
                 speed={rocketAnimationSpeed}
               />
             </div>
           </div>
-          <h3>Alien time is: {alienTime}</h3>
+          <div style={{ width: '100%' }}>
+            <h3>Spaceship clock measures: </h3>
+            <h3 style={{ lineHeight: 0 }}>
+              {spaceshipTime} {spaceshipTime !== 'Calculating...' && timeUnit}
+            </h3>
+          </div>
         </div>
       </div>
     </div>

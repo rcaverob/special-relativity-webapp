@@ -6,21 +6,11 @@ export function validateNumeric(s: string) {
   return s.match(rgx);
 }
 
+// Calculates the time dilation of an observer moving at a given percentage of light speed
 export function calculateTimeDilation(time: number, lsPercentage: number) {
-  console.log('CALCULATING!!!');
   const lsDecimal = lsPercentage / 100;
   return time * Math.sqrt(1 - lsDecimal ** 2);
 }
-
-// Returns the equivalent time duration as measured by an observer moving at the given percentage of light speed
-// export const calculateTimeDilation = debounce(
-//   (time: number, lsPercentage: number) => {
-//     console.log('CALCULATING!!!');
-//     const lsDecimal = lsPercentage / 100;
-//     return time * Math.sqrt(1 - lsDecimal ** 2);
-//   },
-//   1000
-// );
 
 export function formatted(value: number | undefined): string {
   if (value === undefined) {
