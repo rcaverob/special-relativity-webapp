@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import Slider, { Range } from 'rc-slider';
+import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import {
   calculateTimeDilation,
@@ -38,7 +38,6 @@ function scale(
 }
 
 const SR = () => {
-  // const selectRef = useRef(null);
   // Time as measured by observer on Earth
   const [humanTime, setHumanTime] = useState('');
   const humanTimeNumeric = Number(humanTime);
@@ -58,10 +57,8 @@ const SR = () => {
   const rocketAnimationSpeed = scale(velocity, 0, 100, 0.1, 3);
 
   const setATDebounced = useCallback(
-    // setSpaceshipTime("loading");
     debounce((timeNum, v) => {
       setSpaceshipTime(formatted(calculateTimeDilation(timeNum, v)));
-      // setSpaceshipTime(val);
     }, 200),
     []
   );
@@ -69,9 +66,6 @@ const SR = () => {
   useEffect(() => {
     setSpaceshipTime('Calculating...');
     setATDebounced(humanTimeNumeric, velocity);
-    // return () => {
-    //   cleanup
-    // }
   }, [humanTimeNumeric, setATDebounced, velocity]);
 
   return (
@@ -84,7 +78,6 @@ const SR = () => {
               <input
                 value={humanTime}
                 onChange={(e) => {
-                  // e.preventDefault();
                   handleInputChange(e.target.value);
                 }}
                 type="number"
@@ -116,18 +109,14 @@ const SR = () => {
               min={0}
               step={0.01}
               max={99.99}
-              trackStyle={[
-                {
-                  background: '#1e90ff',
-                },
-              ]}
-              handleStyle={[
-                {
-                  background: 'white',
-                  color: '#1e90ff',
-                  borderColor: '#1e90ff',
-                },
-              ]}
+              trackStyle={{
+                background: '#1e90ff',
+              }}
+              handleStyle={{
+                background: 'white',
+                color: '#1e90ff',
+                borderColor: '#1e90ff',
+              }}
               onChange={(val) => setVelocity(val)}
             />
           </div>
