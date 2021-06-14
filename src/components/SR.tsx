@@ -78,6 +78,7 @@ const SR = () => {
             <div className="form-container">
               <input
                 value={humanTime}
+                placeholder={'0'}
                 onChange={(e) => {
                   handleInputChange(e.target.value);
                 }}
