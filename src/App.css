@@ -67,16 +67,33 @@ input[type='number']::-webkit-outer-spin-button {
   width: 75%;
 }
 
+input.input-num {
+  /* border: none; */
+  /* padding: 0; */
+  font-size: 1rem;
+  line-height: 0;
+  border-radius: 0%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+input.input-num:focus {
+  border-width: 2px;
+  border-color: var(--blue);
+  outline: none;
+}
+
 .form-container .select {
   min-width: 13ch;
   width: 25%;
 }
 
-.form-container input:focus {
+/* .form-container input:focus {
   border-width: 2px;
   border-color: var(--blue);
   outline: none;
-}
+} */
 
 .sub-container {
   margin: 1px 1px;

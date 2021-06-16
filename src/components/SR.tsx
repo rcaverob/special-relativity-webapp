@@ -4,13 +4,15 @@ import 'rc-slider/assets/index.css';
 import {
   calculateTimeDilation,
   validateNumeric,
-  formatted,
+  timeUnitMultiplier,
+  converted,
 } from '../utils/numberUtils';
 import animationData from '../lotties/rocket.json';
 import Select from 'react-select';
 import debounce from 'lodash.debounce';
 import Lottie from 'react-lottie';
 import earthImg from '../assets/earth-small.png';
+import { TimeUnit } from '../modules/Time';
 
 const defaultOptions = {
   loop: true,
@@ -22,9 +24,12 @@ const defaultOptions = {
 };
 
 const timeOptions = [
-  { value: 'Days', label: 'Days' },
-  { value: 'Months', label: 'Months' },
-  { value: 'Years', label: 'Years' },
+  { value: 1, label: TimeUnit.Seconds },
+  { value: 60, label: TimeUnit.Minutes },
+  { value: 60 * 60, label: TimeUnit.Hours },
+  { value: 60 * 60 * 24, label: TimeUnit.Days },
+  // { value: 60 * 60 * 24 * 30, label: TimeUnit.Months },
+  // { value: 60 * 60 * 24 * 365, label: TimeUnit.Years },
 ];
 
 function scale(
@@ -41,7 +46,9 @@ const SR = () => {
   // Time as measured by observer on Earth
   const [humanTime, setHumanTime] = useState('');
   const humanTimeNumeric = Number(humanTime);
-  const [timeUnit, setTimeUnit] = useState('Days');
+  const [timeUnit, setTimeUnit] = useState(TimeUnit.Seconds);
+
+  const [spaceshipTimeUnit, setSpaceshipTimeUnit] = useState(TimeUnit.Seconds);
 
   // Time as measured by observer moving relative to static observer
   const [spaceshipTime, setSpaceshipTime] = useState('');
@@ -59,15 +66,18 @@ const SR = () => {
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const setATDebounced = useCallback(
     debounce((timeNum, v) => {
-      setSpaceshipTime(formatted(calculateTimeDilation(timeNum, v)));
+      setSpaceshipTime(
+        converted(calculateTimeDilation(timeNum, v), spaceshipTimeUnit)
+      );
     }, 200),
-    []
+    [spaceshipTimeUnit]
   );
 
   useEffect(() => {
+    const multiplier = timeUnitMultiplier(timeUnit);
     setSpaceshipTime('Calculating...');
-    setATDebounced(humanTimeNumeric, velocity);
-  }, [humanTimeNumeric, setATDebounced, velocity]);
+    setATDebounced(humanTimeNumeric * multiplier, velocity);
+  }, [humanTimeNumeric, setATDebounced, velocity, timeUnit]);
 
   return (
     <div className="outer">
@@ -79,13 +89,14 @@ const SR = () => {
               <input
                 value={humanTime}
                 placeholder={'0'}
+                className={'input-num'}
                 onChange={(e) => {
                   handleInputChange(e.target.value);
                 }}
                 type="number"
-              ></input>{' '}
+              ></input>
               <Select
-                onChange={(e) => setTimeUnit(e!.value)}
+                onChange={(e) => setTimeUnit(e!.label)}
                 className="select"
                 defaultValue={timeOptions[0]}
                 name="time-unit"
@@ -134,9 +145,18 @@ const SR = () => {
           </div>
           <div style={{ width: '100%' }}>
             <h3>Spaceship clock measures: </h3>
-            <h3 style={{ lineHeight: 0 }}>
-              {spaceshipTime} {spaceshipTime !== 'Calculating...' && timeUnit}
-            </h3>
+            <div className="form-container">
+              <h3 style={{ lineHeight: 0, minWidth: '10ch' }}>
+                {spaceshipTime}{' '}
+              </h3>
+              <Select
+                onChange={(e) => setSpaceshipTimeUnit(e!.label)}
+                className="select"
+                defaultValue={timeOptions[0]}
+                name="time-unit"
+                options={timeOptions}
+              />
+            </div>
           </div>
         </div>
       </div>
