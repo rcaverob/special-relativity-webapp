@@ -146,12 +146,19 @@ const SR = () => {
           <div style={{ width: '100%' }}>
             <h3>Spaceship clock measures: </h3>
             <div className="form-container">
-              <h3 style={{ lineHeight: 0, minWidth: '10ch' }}>
+              <h3
+                style={{
+                  lineHeight: 0,
+                  minWidth: '10ch',
+                  fontWeight: 'normal',
+                }}
+              >
                 {spaceshipTime}{' '}
               </h3>
               <Select
                 onChange={(e) => setSpaceshipTimeUnit(e!.label)}
                 className="select"
+                menuPlacement="top"
                 defaultValue={timeOptions[0]}
                 name="time-unit"
                 options={timeOptions}
