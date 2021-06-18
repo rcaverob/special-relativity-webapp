@@ -10,6 +10,16 @@ body {
   --gray: #cecece;
 }
 
+input[type='number'] {
+  -webkit-appearance: textfield;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+input[type='number']::-webkit-inner-spin-button,
+input[type='number']::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+}
+
 * {
   box-sizing: border-box;
 }
@@ -17,6 +27,16 @@ body {
 .select {
   width: 90%;
 }
+
+/* .select .Select-menu-outer {
+  top: auto;
+  bottom: 100rem;
+} */
+
+/* .Select-menu-outer {
+  top: auto;
+  bottom: 100%;
+} */
 
 .earth-container {
   display: flex;
@@ -42,8 +62,10 @@ body {
 }
 
 .form-container {
+  margin: 0.125rem 0.5rem;
   display: flex;
   flex-direction: row;
+  justify-content: space-between;
   font-size: 1rem;
   width: 100%;
 }
@@ -57,16 +79,34 @@ body {
   width: 75%;
 }
 
+input.input-num {
+  /* border: none; */
+  /* padding: 0; */
+  font-size: 1rem;
+  font-family: 'Inter';
+  line-height: 0;
+  border-radius: 0%;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+
+input.input-num:focus {
+  border-width: 2px;
+  border-color: var(--blue);
+  outline: none;
+}
+
 .form-container .select {
   min-width: 13ch;
   width: 25%;
 }
 
-.form-container input:focus {
+/* .form-container input:focus {
   border-width: 2px;
   border-color: var(--blue);
   outline: none;
-}
+} */
 
 .sub-container {
   margin: 1px 1px;
@@ -91,6 +131,7 @@ body {
 }
 
 .lottie {
+  margin-top: 2rem;
   pointer-events: none;
 }
 
