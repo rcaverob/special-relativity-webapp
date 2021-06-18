@@ -1,5 +1,3 @@
-// import debounce from 'lodash.debounce';
-import { createLogicalOr } from 'typescript';
 import { TimeUnit } from '../modules/Time';
 
 // Returns true only if string consists of numbers and dots only
